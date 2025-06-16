@@ -1,0 +1,22 @@
+{
+    "sourceFile": "new_app_two/codemagic.yaml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1750068128406,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1750068240770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,32 +2,29 @@\n   dev:\n     name: Dev Pipeline\n     instance_type: mac_mini_m2\n     max_build_duration: 120\n+    environment:\n+      flutter: stable\n+      xcode: latest\n+      cocoapods: default\n     triggering:\n       events:\n         - push\n       branch­_patterns:\n         - pattern: \"develop-v2\"\n     when:\n       changeset:\n         includes:\n-          - \"androidApp/­*­*\"\n+          - \"android/­*­*\"\n           - \"shared/­*­*\"\n           - \"build.gradle.kts\"\n           - \"settings.gradle.kts\"\n           - \"gradle/­*­*\"\n         excludes:\n-          - \"iosApp/­*­*\"\n-\n-    environment:\n-      java: 17\n-    #      android­_signing:\n-    #        - mbfx\n-    #      groups:\n-    #        - mb\n+          - \"ios/­*­*\"\n     scripts:\n-      - name: Build Dev APK For - ${{ inputs.flavor }}\n+      - name: Build Dev APK For\n         script: ./gradlew assemble${{ inputs.flavor }}DebugRelease\n \n     artifacts:\n       - androidApp/build/­­*/outputs/­­*/­.apk\n"
+                }
+            ],
+            "date": 1750068128405,
+            "name": "Commit-0",
+            "content": "workflows:\n  dev:\n    name: Dev Pipeline\n    instance_type: mac_mini_m2\n    max_build_duration: 120\n    triggering:\n      events:\n        - push\n      branch­_patterns:\n        - pattern: 'develop-v2'\n    when:\n      changeset:\n        includes:\n          - 'androidApp/­*­*'\n          - 'shared/­*­*'\n          - 'build.gradle.kts'\n          - 'settings.gradle.kts'\n          - 'gradle/­*­*'\n        excludes:\n          - 'iosApp/­*­*'\n\n    environment:\n      java: 17\n    #      android­_signing:\n    #        - mbfx\n    #      groups:\n    #        - mb\n    scripts:\n      - name: Build Dev APK For - ${{ inputs.flavor }}\n        script: ./gradlew assemble${{ inputs.flavor }}DebugRelease\n\n    artifacts:\n      - androidApp/build/­­*/outputs/­­*/­.apk\n    publishing:\n      slack:\n        channel: '#gexmobile-android-builds'\n        notify­_on­_build­_start: false\n        notify:\n          failure: true\n          success: true\n\n  prod:\n    name: Prod Pipeline\n    inputs:\n      flavor:\n        type: string\n        default: \"tmtIraq\"\n        description: Here we would specify what flavor to build (alAalam or tmtIraq)\n    triggering:\n      events:\n        - tag\n      tag­_patterns:\n        - pattern: 'android­_v­.­.­'\n    environment:\n      java: 17\n    #      android­_signing:\n    #        - mbfx\n    #      groups:\n    #        - mb\n    scripts:\n      - name: Build Prod APK For - ${{ inputs.flavor }}\n        script: ./gradlew assemble${{ inputs.flavor }}Release\n\n      - name: Build Prod AAB For - ${{ inputs.flavor }}\n        script: ./gradlew bundle${{ inputs.flavor }}Release\n\n    artifacts:\n      - androidApp/build/­­*/outputs/­­*/­.apk\n      - androidApp/build/­­*/outputs/­­*/­.aab\n    publishing:\n      slack:\n        channel: '#gexmobile-android-builds'\n        notify­_on­_build­_start: false\n        notify:\n          failure: false\n          success: true"
+        }
+    ]
+}

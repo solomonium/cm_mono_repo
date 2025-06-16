@@ -1,0 +1,73 @@
+workflows:
+  dev:
+    name: Dev Pipeline
+    instance_type: mac_mini_m2
+    max_build_duration: 120
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch­_patterns:
+        - pattern: "develop-v2"
+    when:
+      changeset:
+        includes:
+          - "android/­*­*"
+          - "shared/­*­*"
+          - "build.gradle.kts"
+          - "settings.gradle.kts"
+          - "gradle/­*­*"
+        excludes:
+          - "ios/­*­*"
+    scripts:
+      - name: Build Dev APK For
+        script: ./gradlew assemble${{ inputs.flavor }}DebugRelease
+
+    artifacts:
+      - androidApp/build/­­*/outputs/­­*/­.apk
+    publishing:
+      slack:
+        channel: "#gexmobile-android-builds"
+        notify­_on­_build­_start: false
+        notify:
+          failure: true
+          success: true
+
+  prod:
+    name: Prod Pipeline
+    inputs:
+      flavor:
+        type: string
+        default: "tmtIraq"
+        description: Here we would specify what flavor to build (alAalam or tmtIraq)
+    triggering:
+      events:
+        - tag
+      tag­_patterns:
+        - pattern: "android­_v­.­.­"
+    environment:
+      java: 17
+    #      android­_signing:
+    #        - mbfx
+    #      groups:
+    #        - mb
+    scripts:
+      - name: Build Prod APK For - ${{ inputs.flavor }}
+        script: ./gradlew assemble${{ inputs.flavor }}Release
+
+      - name: Build Prod AAB For - ${{ inputs.flavor }}
+        script: ./gradlew bundle${{ inputs.flavor }}Release
+
+    artifacts:
+      - androidApp/build/­­*/outputs/­­*/­.apk
+      - androidApp/build/­­*/outputs/­­*/­.aab
+    publishing:
+      slack:
+        channel: "#gexmobile-android-builds"
+        notify­_on­_build­_start: false
+        notify:
+          failure: false
+          success: true
