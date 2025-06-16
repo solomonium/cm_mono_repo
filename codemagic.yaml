@@ -3,7 +3,7 @@ workflows:
     name: Dev Pipeline
     instance_type: mac_mini_m2
     max_build_duration: 120
-    working_directory: new_app_two
+    working_directory: new_app_one
     environment:
       flutter: stable
       xcode: latest
@@ -23,8 +23,8 @@ workflows:
           - "build.gradle.kts"
           - "settings.gradle.kts"
           - "gradle/**"
-        # excludes:
-        #   - "ios/**"
+        excludes:
+          - "ios/**"
     scripts:
       - name: Build Dev APK
         script: flutter build apk --debug
