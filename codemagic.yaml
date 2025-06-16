@@ -11,8 +11,8 @@ workflows:
     triggering:
       events:
         - push
-      branch­_patterns:
-        - pattern: "main"
+      branch_patterns:
+        - pattern: "."
     when:
       changeset:
         includes:

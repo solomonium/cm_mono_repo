@@ -1,0 +1,18 @@
+{
+    "sourceFile": "codemagic.yaml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1750075733567,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1750075733567,
+            "name": "Commit-0",
+            "content": "workflows:\n  dev:\n    name: Dev Pipeline\n    instance_type: mac_mini_m2\n    max_build_duration: 120\n    working_directory: new_app_two\n    environment:\n      flutter: stable\n      xcode: latest\n      cocoapods: default\n    triggering:\n      events:\n        - push\n      branch_patterns:\n        - pattern: \".\"\n    when:\n      changeset:\n        includes:\n          - \"android/­*­*\"\n          - \"shared/­*­*\"\n          - \"build.gradle.kts\"\n          - \"settings.gradle.kts\"\n          - \"gradle/­*­*\"\n        excludes:\n          - \"ios/­*­*\"\n    scripts:\n      - name: Build Dev APK For\n        script:\n          flutter build apk --debug\n          # CURRENT_BUILD_NUMBER=$(google-play get-latest-build-number --package-name \"com.solo.flutter_codemagic_app\" --tracks=\"internal\")\n          # echo \"versionCode=$((CURRENT_BUILD_NUMBER + 1))\" > \"$CM_BUILD_DIR/version.properties\"\n          # flutter build appbundle --release --build-number=$(($CURRENT_BUILD_NUMBER + 1))\n    artifacts:\n      - build/**/outputs/**/*.apk\n      - build/**/outputs/**/mapping.txt\n"
+        }
+    ]
+}
