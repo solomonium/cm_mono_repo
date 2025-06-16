@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1750068128406,
@@ -12,6 +12,10 @@
                 {
                     "date": 1750068240770,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,32 +2,29 @@\n   dev:\n     name: Dev Pipeline\n     instance_type: mac_mini_m2\n     max_build_duration: 120\n+    environment:\n+      flutter: stable\n+      xcode: latest\n+      cocoapods: default\n     triggering:\n       events:\n         - push\n       branch­_patterns:\n         - pattern: \"develop-v2\"\n     when:\n       changeset:\n         includes:\n-          - \"androidApp/­*­*\"\n+          - \"android/­*­*\"\n           - \"shared/­*­*\"\n           - \"build.gradle.kts\"\n           - \"settings.gradle.kts\"\n           - \"gradle/­*­*\"\n         excludes:\n-          - \"iosApp/­*­*\"\n-\n-    environment:\n-      java: 17\n-    #      android­_signing:\n-    #        - mbfx\n-    #      groups:\n-    #        - mb\n+          - \"ios/­*­*\"\n     scripts:\n-      - name: Build Dev APK For - ${{ inputs.flavor }}\n+      - name: Build Dev APK For\n         script: ./gradlew assemble${{ inputs.flavor }}DebugRelease\n \n     artifacts:\n       - androidApp/build/­­*/outputs/­­*/­.apk\n"
+                },
+                {
+                    "date": 1750069970818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,19 +14,21 @@\n         - pattern: \"develop-v2\"\n     when:\n       changeset:\n         includes:\n-          - \"android/­*­*\"\n+          - \"androidApp/­*­*\"\n           - \"shared/­*­*\"\n           - \"build.gradle.kts\"\n           - \"settings.gradle.kts\"\n           - \"gradle/­*­*\"\n         excludes:\n           - \"ios/­*­*\"\n     scripts:\n       - name: Build Dev APK For\n-        script: ./gradlew assemble${{ inputs.flavor }}DebugRelease\n-\n+        script: ./gradlew assembleDebug\n+          CURRENT_BUILD_NUMBER=$(google-play get-latest-build-number --package-name \"com.solo.flutter_codemagic_app\" --tracks=\"internal\")\n+          echo \"versionCode=$((CURRENT_BUILD_NUMBER + 1))\" > \"$CM_BUILD_DIR/version.properties\"\n+          flutter build appbundle --release --build-number=$(($CURRENT_BUILD_NUMBER + 1))\n     artifacts:\n       - androidApp/build/­­*/outputs/­­*/­.apk\n     publishing:\n       slack:\n"
                 }
             ],
             "date": 1750068128405,
