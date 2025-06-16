@@ -16,13 +16,13 @@ workflows:
     when:
       changeset:
         includes:
-          - "android/­*­*"
-          - "shared/­*­*"
+          - "android/**"
+          - "shared/**"
           - "build.gradle.kts"
           - "settings.gradle.kts"
-          - "gradle/­*­*"
+          - "gradle/**"
         excludes:
-          - "ios/­*­*"
+          - "ios/**"
     scripts:
       - name: Build Dev APK For
         script:
