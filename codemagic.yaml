@@ -27,8 +27,7 @@ workflows:
       - name: Build Dev APK
         script: flutter build apk --debug
       - name: Build Dev IPA
-        script:
-          - flutter build ios --simulator
+        script: flutter build ios --simulator
     artifacts:
       - build/**/outputs/**/*.apk
       - build/ios/iphonesimulator/Runner.app

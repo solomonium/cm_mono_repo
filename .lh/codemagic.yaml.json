@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1750075733567,
@@ -32,6 +32,10 @@
                 {
                     "date": 1750085823383,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,11 +28,7 @@\n         script: flutter build apk --debug\n       - name: Build Dev IPA\n         script:\n           - flutter build ios --simulator\n-          # CURRENT_BUILD_NUMBER=$(google-play get-latest-build-number --package-name \"com.solo.flutter_codemagic_app\" --tracks=\"internal\")\n-          # echo \"versionCode=$((CURRENT_BUILD_NUMBER + 1))\" > \"$CM_BUILD_DIR/version.properties\"\n-          # flutter build appbundle --release --build-number=$(($CURRENT_BUILD_NUMBER + 1))\n     artifacts:\n       - build/**/outputs/**/*.apk\n-      - build/ios/ipa/*.ipa\n-      - build/**/outputs/**/mapping.txt\n+      - build/ios/iphonesimulator/Runner.app\n"
+                },
+                {
+                    "date": 1750086098755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,8 +27,8 @@\n       - name: Build Dev APK\n         script: flutter build apk --debug\n       - name: Build Dev IPA\n         script:\n-          - flutter build ios --simulator\n+          flutter build ios --simulator\n     artifacts:\n       - build/**/outputs/**/*.apk\n       - build/ios/iphonesimulator/Runner.app\n"
                 }
             ],
             "date": 1750075733567,
