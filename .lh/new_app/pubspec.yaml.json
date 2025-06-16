@@ -1,0 +1,22 @@
+{
+    "sourceFile": "new_app/pubspec.yaml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1750079273953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1750079279660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,10 +11,8 @@\n dependencies:\n   flutter:\n     sdk: flutter\n \n-  # The following adds the Cupertino Icons font to your application.\n-  # Use with the CupertinoIcons class for iOS style icons.\n   cupertino_icons: ^1.0.8\n \n dev_dependencies:\n   flutter_test:\n"
+                }
+            ],
+            "date": 1750079273953,
+            "name": "Commit-0",
+            "content": "name: new_app\ndescription: \"A new Flutter project.\"\n# The following line prevents the package from being accidentally published to\n# pub.dev using `flutter pub publish`. This is preferred for private packages.\npublish_to: 'none' # Remove this line if you wish to publish to pub.dev\nversion: 1.0.0+1\n\nenvironment:\n  sdk: ^3.7.2\n\ndependencies:\n  flutter:\n    sdk: flutter\n\n  # The following adds the Cupertino Icons font to your application.\n  # Use with the CupertinoIcons class for iOS style icons.\n  cupertino_icons: ^1.0.8\n\ndev_dependencies:\n  flutter_test:\n    sdk: flutter\n\n  flutter_lints: ^5.0.0\n\nflutter:\n\n\n  uses-material-design: true\n\n "
+        }
+    ]
+}
