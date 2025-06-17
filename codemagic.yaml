@@ -19,10 +19,6 @@ workflows:
       changeset:
         includes:
           - "android/**"
-          - "shared/**"
-          - "build.gradle.kts"
-          - "settings.gradle.kts"
-          - "gradle/**"
         excludes:
           - "ios/**"
     scripts:
